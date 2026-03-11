@@ -22,28 +22,24 @@ public class GestorEmpleados {
 	public void ejecutar() {
 		Scanner sc = new Scanner(System.in);
 
-		int opcion;
+		int opcion = 0;
+		boolean ok = true;
 		do {
 			consola.mostrarMenu();
-			System.out.printf("\n> %s", opcion = sc.nextInt());
+			System.out.print("\n> ");
+			opcion = sc.nextInt();
 
-			if (opcion == 1) { // 1
-
-				contratarEmpleado();
-
-			} else if (opcion == 2) { // 2
-
-			} else if (opcion == 3) { // 3
-
-				listarPorFiltro();
-
-			} else if (opcion == 4) { // 4
-				continue;
-			} else {
-				opcion = 0;
+			switch (opcion) {
+			case 1 -> contratarEmpleado();
+			case 2 -> contratarEmpleado();
+			case 3 -> listarPorFiltro();
+			case 4 -> {
+				System.out.println("\n\tADIOS!!!");
+				ok = false;
+			}
 			}
 
-		} while (opcion != 4);
+		} while (ok);
 
 	}
 
@@ -56,42 +52,57 @@ public class GestorEmpleados {
 		String apellidos;
 		double sueldoBase;
 		int categoria;
-		int ventas;
 
-		int opcion;
+		int opcion = 0;
+		boolean ok = true;
 		do {
 			System.out.println("1 - Técnico\n" + "\n2 - Comercial");
-			System.out.printf("\n> %s", opcion = sc.nextInt());
+			System.out.printf("\n> ");
+			opcion = sc.nextInt();
 
-			if (opcion == 1) { // Técnico
+			switch (opcion) {
+			case 1 -> {
+				System.out.print("\n\nDNI> ");
+				dni = sc.nextLine();
+				sc.nextInt();
 
-				System.out.printf("\n\nDNI> %s", dni = sc.nextLine());
-				System.out.printf("\nNOMBRE> %s", nombre = sc.nextLine());
-				System.out.printf("\nAPELLIDOS> %s", apellidos = sc.nextLine());
-				System.out.printf("\nSUELDO BASE> %s", sueldoBase = sc.nextDouble());
-				System.out.printf("\nCATEGORIA> %s", categoria = sc.nextInt());
+				System.out.print("\nNOMBRE> ");
+				nombre = sc.nextLine();
+				sc.nextLine();
+				System.out.print("\nAPELLIDOS> ");
+				apellidos = sc.nextLine();
+				sc.nextLine();
+				System.out.print("\nSUELDO BASE> ");
+				sueldoBase = sc.nextDouble();
+				sc.nextLine();
+				System.out.print("\nCATEGORIA> ");
+				categoria = sc.nextInt();
+				sc.nextLine();
 
 				Empleado tecnico = new Tecnico(dni, nombre, apellidos, sueldoBase, categoria);
 
 				plantilla.agregarEmpleado(tecnico);
 
-			} else if (opcion == 2) { // Comercial
-
-				System.out.printf("\n\nDNI> %s", dni = sc.nextLine());
-				System.out.printf("\nNOMBRE> %s", nombre = sc.nextLine());
-				System.out.printf("\nAPELLIDOS> %s", apellidos = sc.nextLine());
-				System.out.printf("\nSUELDO BASE> %s", sueldoBase = sc.nextDouble());
+				ok = false;
+			}
+			case 2 -> {
+				System.out.print("\n\nDNI> ");
+				dni = sc.nextLine();
+				System.out.print("\nNOMBRE> ");
+				nombre = sc.nextLine();
+				System.out.print("\nAPELLIDOS> ");
+				apellidos = sc.nextLine();
+				System.out.print("\nSUELDO BASE> ");
+				sueldoBase = sc.nextDouble();
 
 				Empleado comercial = new Comercial(dni, nombre, apellidos, sueldoBase);
 
 				plantilla.agregarEmpleado(comercial);
-
-			} else {
-				opcion = 0;
+				ok = false;
 			}
-			consola.pausa();
+			}
 
-		} while (opcion == 1 || opcion == 2);
+		} while (ok);
 	}
 
 	public void listarTodos() {
@@ -99,7 +110,9 @@ public class GestorEmpleados {
 	}
 
 	public void listarPorFiltro() {
-		// TODO document why this method is empty
+		Scanner sc = new Scanner(System.in);
+
+		plantilla.getEmpleadosPorNombre(sc.nextLine());
 	}
 
 	public void listarEmpleados(List<Empleado> empleados) {
@@ -108,7 +121,7 @@ public class GestorEmpleados {
 		}
 	}
 
-	public void ordenarPorNOmbre(List<Empleado> empleados) {
-		// TODO document why this method is empty
+	public void ordenarPorNombre(List<Empleado> empleados) {
+
 	}
 }
