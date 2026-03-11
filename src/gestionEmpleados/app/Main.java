@@ -1,4 +1,4 @@
-package gestionEmpleados;
+package gestionEmpleados.app;
 
 public class Main {
 
